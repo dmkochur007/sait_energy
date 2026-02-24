@@ -167,8 +167,8 @@ export default function HomePage() {
             </Link>
           </div>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {popular.slice(0, 8).map((product) => (
-              <ProductCard key={product.id} product={product} />
+            {popular.slice(0, 8).map((product, index) => (
+              <ProductCard key={product.id} product={product} priority={index < 4} />
             ))}
           </div>
           <div className="mt-8 text-center md:hidden">

@@ -10,7 +10,7 @@ import { useCart } from "@/lib/cart-context"
 import { type Product, formatPrice } from "@/lib/products"
 import { toast } from "sonner"
 
-export function ProductCard({ product }: { product: Product }) {
+export function ProductCard({ product, priority = false }: { product: Product; priority?: boolean }) {
   const { addItem } = useCart()
 
   function handleAdd() {
@@ -40,6 +40,7 @@ export function ProductCard({ product }: { product: Product }) {
           fill
           className="object-cover transition-transform duration-500 group-hover:scale-105"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+          priority={priority}
         />
       </Link>
 
