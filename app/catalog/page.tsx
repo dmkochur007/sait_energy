@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useMemo } from "react"
+import { useState, useMemo, Suspense } from "react"
 import { useSearchParams } from "next/navigation"
 import { Search, SlidersHorizontal, X } from "lucide-react"
 import { Input } from "@/components/ui/input"
@@ -20,6 +20,21 @@ import { products, brands, categories, formatPrice } from "@/lib/products"
 type SortOption = "default" | "price-asc" | "price-desc" | "power-desc" | "popular" | "new"
 
 export default function CatalogPage() {
+  return (
+    <Suspense fallback={
+      <div className="mx-auto max-w-7xl px-4 py-8 lg:px-8">
+        <div className="mb-8">
+          <h1 className="text-3xl font-bold text-foreground">{"Каталог товарів"}</h1>
+          <p className="mt-1 text-muted-foreground">{"Завантаження..."}</p>
+        </div>
+      </div>
+    }>
+      <CatalogContent />
+    </Suspense>
+  )
+}
+
+function CatalogContent() {
   const searchParams = useSearchParams()
 
   const initialCategory = searchParams.get("category") || ""
